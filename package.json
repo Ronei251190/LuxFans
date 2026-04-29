@@ -2,13 +2,13 @@
   "name": "luxfans",
   "version": "0.1.0",
   "private": true,
-  "scripts": {
-  "dev": "next dev",
+"scripts": {
+  "dev": "next dev --turbopack",
   "build": "prisma generate && next build",
   "start": "next start",
   "lint": "eslint",
   "postinstall": "prisma generate"
-  },
+}
   "dependencies": {
     "@prisma/adapter-better-sqlite3": "^7.8.0",
     "@prisma/client": "^5.22.0",
