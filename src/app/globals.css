@@ -1,0 +1,97 @@
+@import "tailwindcss";
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  background: #050505;
+  color: white;
+}
+
+input,
+textarea,
+select {
+  color: white;
+}
+
+.premium-bg {
+  background:
+    radial-gradient(circle at top left, rgba(236, 72, 153, 0.22), transparent 35%),
+    radial-gradient(circle at bottom right, rgba(124, 58, 237, 0.18), transparent 35%),
+    #050505;
+}
+
+.premium-card {
+  background: rgba(255, 255, 255, 0.055);
+  border: 1px solid rgba(255, 255, 255, 0.11);
+  border-radius: 24px;
+  box-shadow: 0 24px 80px rgba(0, 0, 0, 0.45);
+  backdrop-filter: blur(18px);
+}
+
+.premium-input {
+  width: 100%;
+  padding: 14px;
+  border-radius: 18px;
+  background: rgba(24, 24, 27, 0.9);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  outline: none;
+}
+
+.premium-input:focus {
+  border-color: rgba(236, 72, 153, 0.8);
+}
+
+.premium-button {
+  background: linear-gradient(135deg, #ec4899, #a855f7);
+  padding: 12px 20px;
+  border-radius: 18px;
+  font-weight: 800;
+  box-shadow: 0 18px 45px rgba(236, 72, 153, 0.25);
+}
+
+.premium-button:hover {
+  opacity: 0.9;
+}
+
+.premium-muted {
+  color: #a1a1aa;
+}
+.premium-card {
+  position: relative;
+  overflow: hidden;
+}
+
+.premium-card::before {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  background: linear-gradient(
+    135deg,
+    rgba(236, 72, 153, 0.22),
+    rgba(168, 85, 247, 0.12),
+    transparent
+  );
+  opacity: 0;
+  transition: opacity 0.35s ease;
+  pointer-events: none;
+}
+
+.premium-card:hover::before {
+  opacity: 1;
+}
+
+.premium-card > * {
+  position: relative;
+  z-index: 1;
+}
+
+.premium-button {
+  transition: transform 0.25s ease, box-shadow 0.25s ease, opacity 0.25s ease;
+}
+
+.premium-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 20px 60px rgba(236, 72, 153, 0.35);
+}
