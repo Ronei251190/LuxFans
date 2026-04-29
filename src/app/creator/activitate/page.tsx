@@ -1,40 +1,13 @@
-import { NextResponse } from "next/server";
-import { prisma } from "@/lib/prisma";
+export default function ActivateCreatorPage() {
+  return (
+    <main className="min-h-screen premium-bg text-white flex items-center justify-center p-6">
+      <div className="premium-card p-8 max-w-md text-center">
+        <h1 className="text-3xl font-black text-pink-500 mb-4">
+          Activate Creator
+        </h1>
 
-export async function POST(req: Request) {
-  try {
-    const { userId } = await req.json();
-
-    if (!userId) {
-      return NextResponse.json(
-        { error: "User ID lipsă." },
-        { status: 400 }
-      );
-    }
-
-    const user = await prisma.user.update({
-      where: { id: userId },
-      data: {
-        role: "creator",
-        isCreator: true,
-      },
-    });
-
-    return NextResponse.json({
-      user: {
-        id: user.id,
-        username: user.username,
-        email: user.email,
-        role: user.role,
-        isCreator: user.isCreator,
-      },
-    });
-  } catch (err) {
-    console.error("ACTIVATE CREATOR ERROR:", err);
-
-    return NextResponse.json(
-      { error: "Eroare la activare creator." },
-      { status: 500 }
-    );
-  }
+        <p className="premium-muted">Creator activation page.</p>
+      </div>
+    </main>
+  );
 }
