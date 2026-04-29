@@ -1,15 +1,16 @@
 import { NextResponse } from "next/server";
 import bcrypt from "bcryptjs";
-import { prisma } from "@/lib/prisma";
 
 export async function POST(req: Request) {
   try {
+    const { prisma } = await import("@/lib/prisma");
+
     const body = await req.json();
     const { email, password } = body;
 
     if (!email || !password) {
       return NextResponse.json(
-        { error: "Completează toate câmpurile" },
+        { error: "Email și parola sunt obligatorii." },
         { status: 400 }
       );
     }
@@ -20,17 +21,17 @@ export async function POST(req: Request) {
 
     if (!user) {
       return NextResponse.json(
-        { error: "User inexistent" },
-        { status: 400 }
+        { error: "Email sau parolă incorectă." },
+        { status: 401 }
       );
     }
 
-    const validPassword = await bcrypt.compare(password, user.password);
+    const ok = await bcrypt.compare(password, user.password);
 
-    if (!validPassword) {
+    if (!ok) {
       return NextResponse.json(
-        { error: "Parolă greșită" },
-        { status: 400 }
+        { error: "Email sau parolă incorectă." },
+        { status: 401 }
       );
     }
 
@@ -40,12 +41,15 @@ export async function POST(req: Request) {
         username: user.username,
         email: user.email,
         role: user.role,
+        isCreator: user.isCreator,
+        ageVerified: user.ageVerified,
       },
     });
   } catch (err) {
     console.error("LOGIN ERROR:", err);
+
     return NextResponse.json(
-      { error: "Eroare server" },
+      { error: "Eroare server." },
       { status: 500 }
     );
   }
